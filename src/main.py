@@ -38,6 +38,17 @@ def modeling():
     training_piper.run()
 
 
+def inference():
+    # Los pasos que deben pasar en la inferencia: 
+    # Tomar los datos desde la ultima fecha desde la api --> PredictionDataFetcher esta clase la hice pero no se si es la correcta
+    # preprocesar para dejarlo limpio usando las feaures para preparar la data 
+
+    # pasarlo por el ss guardado 
+    # pasarlo por el model para que guarde las predicciones 
+
+    # recorda que las fechas se deben correr en el horario que habian pasado que creo que era entre la 1 y 4 
+    pass
+
 
 def main(args):
 
@@ -45,7 +56,12 @@ def main(args):
         modeling()
         return 
 
-    print("siguiente paso para prediccion")
+    if args.inference:
+        inference()
+        return
+    
+
+    print("No se ha seleccionado una opcion correcta")
 
 if __name__ == "__main__":
 
