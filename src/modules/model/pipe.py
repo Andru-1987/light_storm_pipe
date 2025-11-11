@@ -33,7 +33,7 @@ class PipelineRunner:
         os.makedirs(self.metrics_dir, exist_ok=True)
 
         logging.basicConfig(
-            filename=os.path.join(MODEL_DIR, "pipeline.log"),
+            filename=os.path.join(MODEL_DIR_LOGS, "pipeline.log"),
             level=logging.INFO,
             format="%(asctime)s - %(levelname)s - %(message)s"
         )
