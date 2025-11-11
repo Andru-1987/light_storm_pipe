@@ -4,8 +4,13 @@ import logging
 from sklearn.linear_model import LogisticRegression
 
 # Directorio donde se guardarán los modelos y scalers
+MODEL_DIR_LOGS = "logs"
 MODEL_DIR = "artifacts/model"
+SS_DIR = "artifacts/ss"
+
+os.makedirs(MODEL_DIR_LOGS, exist_ok=True)
 os.makedirs(MODEL_DIR, exist_ok=True)
+os.makedirs(SS_DIR, exist_ok=True)
 
 # Configuración de logging
 logging.basicConfig(
@@ -45,14 +50,15 @@ class ModelTrainer:
         try:
             # Guardar modelos y scalers (EURGBP)
             joblib.dump(model, os.path.join(MODEL_DIR, "model_eurgbp_logistic.pkl"))
-            joblib.dump(scaler, os.path.join(MODEL_DIR, "scaler_eurgbp.pkl"))
+            joblib.dump(scaler, os.path.join(SS_DIR, "scaler_eurgbp.pkl"))
 
             # Crear copias para USDJPY (mismo modelo, misma arquitectura)
             joblib.dump(model, os.path.join(MODEL_DIR, "model_usdjpy.pkl"))
-            joblib.dump(scaler, os.path.join(MODEL_DIR, "scaler_usdjpy.pkl"))
+            joblib.dump(scaler, os.path.join(SS_DIR, "scaler_usdjpy.pkl"))
 
             logging.info("Modelos y scalers guardados correctamente.")
-            print(f"\nModelos y scalers guardados correctamente en:\n{MODEL_DIR}")
+            print(f"\nModelos guardados correctamente en:\n{MODEL_DIR}")
+            print(f"\nScalers guardados correctamente en:\n{MODEL_DIR}")
 
         except Exception as e:
             logging.error(f"Error al guardar modelos o scalers: {e}")

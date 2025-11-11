@@ -53,3 +53,13 @@
 └── .env.example                   # Variables de entorno (API key, rutas, etc.)
 
 ```
+
+Como deberia correr? 
+
+```bash
+docker compose run ml_service train
+```
+
+```bash
+docker compose run ml_service predict 
+```

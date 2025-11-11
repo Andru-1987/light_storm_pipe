@@ -1,0 +1,12 @@
+services:
+  ml_service:
+    build: .
+    container_name: ml_service
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./artifacts:/app/artifacts
+      - ./logs:/app/logs
+      - ./outputs:/app/outputs
+    command: ["--train-model"] # esto es un valor default

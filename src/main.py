@@ -1,7 +1,9 @@
 from modules.data.fetch_data import FetchData
 from modules.data.pre_processing import ForexFeatureEngineer
 from modules.data.upload_feature_store import FeatureStoreManager
-from modules.utils.args_helper import ArgsHelper
+import argparse
+
+
 
 from modules.model.pipe import PipelineRunner
 
@@ -23,28 +25,33 @@ def modeling():
     engineer = ForexFeatureEngineer()
     df_features = engineer.prepare_features(df, date_column='timestamp')
 
+
     store_manager = FeatureStoreManager(".")
     file=store_manager.save_features(df_features)
 
     print("Guardado en:", file)
 
-    PipelineRunner(df_features)
+    # FIX tiene 1 valor null que debe ser por el shift --> arreglar 
+    df_features.fillna(0, inplace=True)
+    training_piper = PipelineRunner(df_features)
+
+    training_piper.run()
 
 
 
+def main(args):
 
-def main(params):
+    if args.train_model:
+        modeling()
+        return 
 
-    # Obtencion de datos
-    
-    print(params)
-
+    print("siguiente paso para prediccion")
 
 if __name__ == "__main__":
 
-    args_helper = ArgsHelper()
-    params = args_helper.get_params()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--train-model", action="store_true", help="Ejecuta el entrenamiento del modelo")
+    parser.add_argument("--inference", action="store_true", help="Ejecuta la inferencia")
+    args = parser.parse_args()
 
-    args_helper.show_parameters()
-
-    main(params)
+    main(args)

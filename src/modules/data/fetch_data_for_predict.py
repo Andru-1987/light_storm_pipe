@@ -15,7 +15,7 @@ class PredictionDataFetcher:
 
     def __init__(self):
         self.api_key = os.getenv("API_KEY")
-        self.base_url = os.getenv("API_URL")
+        self.api_url = os.getenv("API_URL")
 
         if not self.api_key:
             raise ValueError("No se encontró la variable ALPHAVANTAGE_API_KEY en el archivo .env")
@@ -52,7 +52,7 @@ class PredictionDataFetcher:
         }
 
         logging.info(f"Obteniendo datos recientes de {from_symbol}/{to_symbol} desde Alpha Vantage...")
-        response = requests.get(self.base_url, params=params)
+        response = requests.get(self.api_url, params=params)
         if response.status_code != 200:
             logging.error(f"Error HTTP {response.status_code} al llamar a Alpha Vantage")
             return None

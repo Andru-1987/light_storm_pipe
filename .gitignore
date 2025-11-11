@@ -1,3 +1,21 @@
-.venv
+# Entorno virtual
+.venv/
+
+# Variables de entorno
 .env
-__pycache__
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de logs, artefactos y outputs
+logs/
+artifacts/
+outputs/
+
+# Datos sensibles o generados
+data/
+
+# Archivos de Jupyter checkpoints
+.notebooks/.ipynb_checkpoints/
