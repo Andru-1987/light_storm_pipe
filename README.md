@@ -57,9 +57,9 @@
 Como deberia correr? 
 
 ```bash
-docker compose run ml_service train
+docker compose run ml_service --train-model
 ```
 
 ```bash
-docker compose run ml_service predict 
+docker compose run ml_service --inference
 ```
